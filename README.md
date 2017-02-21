@@ -10,4 +10,4 @@ The extension will show up in the toolbar, the icon is a stack of books.
 
 ## Usage
 To inspect the xAPI statements being sent, click the extension icon in Chrome's toolbar, a new window will appear, as statements are sent to the LRS they will appear in the list.
-![Extension screenshot showing xAPI statements](docs/images/screenshot?raw=true "Screenshot")
+![Extension screenshot showing xAPI statements](docs/images/screenshot.png?raw=true "Screenshot")
