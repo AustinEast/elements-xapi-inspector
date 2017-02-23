@@ -41,13 +41,12 @@ export default class Statements extends Component {
                 {statements.map((s, index) => {
                     // Look for an object's name. If there is no name, look for description.
                     // If those are found, construct the legible statement. Otherwise just print the verb ID.
+                    let printedStatement = s && s.verb && s.verb.id;
                     if (s && s.object && s.object.definition && s.object.definition && s.object.definition.name &&  s.object.definition.name[language] || s && s.object && s.object.definition && s.object.definition && s.object.definition.description &&  s.object.definition.description[language]) {
                         const name = s && s.actor && s.actor.name || 'Unknown name';
                         const verb = s && s.verb && s.verb.display && s.verb.display[language] || 'Unknown verb';
                         const object = s && s.object && s.object.definition && s.object.definition && s.object.definition.name &&  s.object.definition.name[language] || s && s.object && s.object.definition && s.object.definition && s.object.definition.description &&  s.object.definition.description[language];
-                        const printedStatement = name + ' ' + verb + ' ' + object;
-                    } else {
-                        const printedStatement = s && s.verb && s.verb.id || 'Unknown verb';
+                        printedStatement = name + ' ' + verb + ' ' + object;
                     }
 
                     const timestamp = moment(s.timestamp);
