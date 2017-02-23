@@ -39,17 +39,24 @@ export default class Statements extends Component {
         return (
             <article>
                 {statements.map((s, index) => {
-                    const name = s && s.actor && s.actor.name || 'Unknown name';
-                    const verb = s && s.verb && s.verb.display && s.verb.display[language] || 'Unknown verb';
                     // Look for an object's name. If there is no name, look for description.
-                    const object = s && s.object && s.object.definition && s.object.definition && s.object.definition.name &&  s.object.definition.name[language] || s && s.object && s.object.definition && s.object.definition && s.object.definition.description &&  s.object.definition.description[language] || 'Unknown object';
+                    // If those are found, construct the legible statement. Otherwise just print the verb ID.
+                    if (s && s.object && s.object.definition && s.object.definition && s.object.definition.name &&  s.object.definition.name[language] || s && s.object && s.object.definition && s.object.definition && s.object.definition.description &&  s.object.definition.description[language]) {
+                        const name = s && s.actor && s.actor.name || 'Unknown name';
+                        const verb = s && s.verb && s.verb.display && s.verb.display[language] || 'Unknown verb';
+                        const object = s && s.object && s.object.definition && s.object.definition && s.object.definition.name &&  s.object.definition.name[language] || s && s.object && s.object.definition && s.object.definition && s.object.definition.description &&  s.object.definition.description[language];
+                        const printedStatement = name + ' ' + verb + ' ' + object;
+                    } else {
+                        const printedStatement = s && s.verb && s.verb.id || 'Unknown verb';
+                    }
+
                     const timestamp = moment(s.timestamp);
                     const timeAgo = moment.duration(moment().diff(timestamp)).format('h[h]m[m]s[s] ago');
                     return (
 
                         <div key={index} className="statement-block">
                             <div className="statement-heading">
-                                <h3>{name + ' ' + verb + ' ' + object}</h3>
+                                <h3>{printedStatement}</h3>
                                 <span>{timeAgo}</span>
                             </div>
                             <JSONTree
