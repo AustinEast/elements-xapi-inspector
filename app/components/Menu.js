@@ -15,12 +15,8 @@ export default class Menu extends Component {
         clearStatements();
     }
 
-    createLanguage(l) {
-        const { language } = this.props;
-
-        return (
-            <option key={ l.id } value={ l.id }> { l.name }</option>
-        )
+    createLanguage(language) {
+        return ( <option key={ language.id } value={ language.id }> { language.name }</option> )
     }
 
     changeLanguage(event) {
