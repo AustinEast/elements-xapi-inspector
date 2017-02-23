@@ -12,9 +12,13 @@ body {
 }
 
 .button-panel {
+    z-index: 999;
+    background-color: #2A2F3A;
+    position: fixed;
     display: flex;
     flex-direction: row;
     padding: 5px;
+    width: 100%;
 
     button {
         cursor: pointer;
@@ -25,8 +29,23 @@ body {
         display: block;
         margin: 5px;
     }
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-align-last: center;
+        margin: 5px;
+        flex-grow: 1;
+        border: 0;
+        border-radius: 0;
+        background-color: #4f5a65;
+        color: white;
+    }
 };
 
+/* Adds padding to offset the fixed nav */
+.button-panel-helper {
+    padding: 19px;
+};
 
 .statement-block {
     margin-bottom: 25px;
