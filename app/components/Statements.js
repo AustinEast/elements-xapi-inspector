@@ -33,19 +33,35 @@ export default class Statements extends Component {
         addStatement(message);
     }
 
+    checkLanguage(object) {
+        const { language } = this.props;
+
+        if (object[language]) {
+            return language;
+        } else {
+            return Object.keys(obj)[0];
+        }
+    }
+
     render() {
         const { statements } = this.props;
-        const { language } = this.props;
+
         return (
             <article>
                 {statements.map((s, index) => {
-                    // Look for an object's name. If there is no name, look for description.
-                    // If those are found, construct the legible statement. Otherwise just print the verb ID.
+                    // Look for the statement object's name. If there is no name, look for description.
+                    // If those are found, construct the legible statement. 
+                    //      Each statement will look to see if it contains the default language. 
+                    //      If it does, it will use that. If not, it will use the first language described in the object.
+                    // Otherwise just print the verb ID.
                     let printedStatement = s && s.verb && s.verb.id;
-                    if (s && s.object && s.object.definition && s.object.definition && s.object.definition.name &&  s.object.definition.name[language] || s && s.object && s.object.definition && s.object.definition && s.object.definition.description &&  s.object.definition.description[language]) {
+                    if (s && s.object && s.object.definition && s.object.definition && s.object.definition.name &&  s.object.definition.name[this.checkLanguage(s.object.definition.name)] 
+                    || s && s.object && s.object.definition && s.object.definition && s.object.definition.description &&  s.object.definition.description[this.checkLanguage(s.object.definition.description)]) {
                         const name = s && s.actor && s.actor.name || 'Unknown name';
-                        const verb = s && s.verb && s.verb.display && s.verb.display[language] || 'Unknown verb';
-                        const object = s && s.object && s.object.definition && s.object.definition && s.object.definition.name &&  s.object.definition.name[language] || s && s.object && s.object.definition && s.object.definition && s.object.definition.description &&  s.object.definition.description[language];
+                        const verb = s && s.verb && s.verb.display && s.verb.display[this.checkLanguage(s.verb.display)] || 'Unknown verb';
+                        const object = s && s.object && s.object.definition && s.object.definition && s.object.definition.name &&  s.object.definition.name[this.checkLanguage(s.object.definition.name)] 
+                        || s && s.object && s.object.definition && s.object.definition && s.object.definition.description &&  s.object.definition.description[this.checkLanguage(s.object.definition.description)];
+                        
                         printedStatement = name + ' ' + verb + ' ' + object;
                     }
 
