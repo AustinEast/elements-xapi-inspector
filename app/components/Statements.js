@@ -54,14 +54,14 @@ export default class Statements extends Component {
                     //      Each statement will look to see if it contains the default language. 
                     //      If it does, it will use that. If not, it will use the first language described in the object.
                     // Otherwise just print the verb ID.
-                    let printedStatement = s && s.verb && s.verb.id;
+                    let printedStatement = s && s.verb && s.verb.id || 'Unknown verb';
                     if (s && s.object && s.object.definition && s.object.definition && s.object.definition.name &&  s.object.definition.name[this.checkLanguage(s.object.definition.name)] 
                     || s && s.object && s.object.definition && s.object.definition && s.object.definition.description &&  s.object.definition.description[this.checkLanguage(s.object.definition.description)]) {
                         const name = s && s.actor && s.actor.name || 'Unknown name';
                         const verb = s && s.verb && s.verb.display && s.verb.display[this.checkLanguage(s.verb.display)] || 'Unknown verb';
                         const object = s && s.object && s.object.definition && s.object.definition && s.object.definition.name &&  s.object.definition.name[this.checkLanguage(s.object.definition.name)] 
                         || s && s.object && s.object.definition && s.object.definition && s.object.definition.description &&  s.object.definition.description[this.checkLanguage(s.object.definition.description)];
-                        
+
                         printedStatement = name + ' ' + verb + ' ' + object;
                     }
 
