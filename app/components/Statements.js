@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Scroll from 'react-scroll';
 import JSONTree from 'react-json-tree';
 import moment from 'moment';
 import 'moment-duration-format';
@@ -9,6 +10,7 @@ export default class Statements extends Component {
     constructor(props) {
         super(props);
         this.foundStatement = this.foundStatement.bind(this);
+        this.checkLanguage = this.checkLanguage.bind(this);
         this.state = { lastUpdated: undefined };
     }
 
@@ -31,7 +33,10 @@ export default class Statements extends Component {
 
     foundStatement(message) {
         const { addStatement } = this.props;
+        const { autoScroll } = this.props;
+
         addStatement(message);
+        if (autoScroll) { Scroll.animateScroll.scrollToBottom(); }
     }
 
     checkLanguage(object) {
@@ -41,7 +46,7 @@ export default class Statements extends Component {
             if (object[language]) {
                 return language;
             } else {
-                return Object.keys(obj)[0];
+                return Object.keys(object)[0];
             }
         }
     }

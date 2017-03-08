@@ -25,12 +25,14 @@ class App extends Component {
 function mapStateToProps(state) {
     return {
         statements: state.statements,
-        language: state.language
+        language: state.language,
+        autoScroll: state.autoScroll
     };
 }
 
 export default connect(mapStateToProps, {
     addStatement: actions.addStatement,
     clearStatements: actions.clearStatements,
-    languageSelected: actions.languageSelected
+    languageSelected: actions.languageSelected,
+    toggleAutoScroll: actions.toggleAutoScroll
 })(App);

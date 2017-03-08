@@ -7,7 +7,8 @@ export default class Menu extends Component {
         super(props);
         this.clear = this.clear.bind(this);
         this.createLanguage = this.createLanguage.bind(this);
-        this.changeLanguage = this.changeLanguage.bind(this)
+        this.changeLanguage = this.changeLanguage.bind(this);
+        this.clickedAutoScroll = this.clickedAutoScroll.bind(this);
     }
 
     clear() {
@@ -24,11 +25,20 @@ export default class Menu extends Component {
         languageSelected(event.target.value);
     }
 
+    clickedAutoScroll() {
+        const { autoScroll } = this.props;
+        const { toggleAutoScroll } = this.props;
+        toggleAutoScroll(autoScroll);
+    }
+
     render() {
         const { language } = this.props;
         const { statements } = this.props;
         const { languages } = this.props;
+        const { autoScroll } = this.props;
+
         const languageOptions = _.map(languages, this.createLanguage);
+        const autoScrollEnabled = autoScroll? 'Enabled' : 'Disabled';
 
         return (
             <header>
@@ -36,6 +46,7 @@ export default class Menu extends Component {
                     <button onClick={this.clear.bind(this)}>Clear</button>
                     <ClipboardButton data-clipboard-text={JSON.stringify(statements, null, 4)}>Copy Statements</ClipboardButton>
                     <select value = { language } onChange= { this.changeLanguage }>{ languageOptions }</select>
+                    <button onClick={this.clickedAutoScroll.bind(this)}>Autoscroll - { autoScrollEnabled }</button>
                 </div>
                 <div className="button-panel-helper"></div>
             </header>

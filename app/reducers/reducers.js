@@ -22,3 +22,12 @@ export function language(state = 'en-us', action) {
             return state;
     }
 }
+
+export function autoScroll(state = true, action) {
+    switch (action.type) {
+        case types.AUTOSCROLL_TOGGLED:
+            return action.autoScroll
+        default:
+            return state;
+    }
+}
