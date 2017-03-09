@@ -5,7 +5,8 @@ import { languages } from '../data/languages';
 import * as actions from '../actions';
 
 import Menu from '../components/Menu.js';
-import Statements from '../components/Statements.js'
+import Statements from '../components/Statements.js';
+import Footer from '../components/Footer.js';
 
 class App extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class App extends Component {
             <main>
                 <Menu languages={languages} {...this.props} />
                 <Statements {...this.props} />
+                <Footer />
             </main>
         );
     }

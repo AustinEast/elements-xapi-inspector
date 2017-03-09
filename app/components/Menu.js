@@ -17,7 +17,7 @@ export default class Menu extends Component {
     }
 
     createLanguage(language) {
-        return ( <option key={ language.id } value={ language.id }> { language.name }</option> )
+        return ( <option key={ language.id } value={ language.id }>Default Language - { language.name }</option> )
     }
 
     changeLanguage(event) {
