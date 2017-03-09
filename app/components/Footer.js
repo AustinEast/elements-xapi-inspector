@@ -20,12 +20,15 @@ export default class Footer extends Component {
     render() {
         return (
             <footer>
+                <div className="button-panel">
                 <span onClick={this.scrollDown.bind(this)}>
                     <i className="icon ion-android-arrow-dropdown-circle"></i> 
                 </span>     
                 <span onClick={this.scrollUp.bind(this)}>              
                     <i className="icon ion-android-arrow-dropup-circle"></i>
                 </span>
+                </div>
+                <div className="button-panel-helper"></div>
             </footer>
         );
     }
