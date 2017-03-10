@@ -26,16 +26,12 @@ export default class Menu extends Component {
     }
 
     clickedAutoScroll() {
-        const { autoScroll } = this.props;
-        const { toggleAutoScroll } = this.props;
+        const { autoScroll, toggleAutoScroll } = this.props;
         toggleAutoScroll(autoScroll);
     }
 
     render() {
-        const { language } = this.props;
-        const { statements } = this.props;
-        const { languages } = this.props;
-        const { autoScroll } = this.props;
+        const { language, statements, languages, autoScroll } = this.props;
 
         const languageOptions = _.map(languages, this.createLanguage);
         const autoScrollEnabled = autoScroll? 'Enabled' : 'Disabled';

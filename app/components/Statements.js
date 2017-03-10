@@ -32,9 +32,7 @@ export default class Statements extends Component {
     }
 
     foundStatement(message) {
-        const { addStatement } = this.props;
-        const { autoScroll } = this.props;
-
+        const { addStatement, autoScroll } = this.props;
         addStatement(message);
         if (autoScroll) { Scroll.animateScroll.scrollToBottom(); }
     }
