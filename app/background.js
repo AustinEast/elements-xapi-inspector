@@ -1,5 +1,10 @@
 import _ from 'lodash';
 
+let requestObj = {
+    requestId: '',
+    data: ''
+};
+
 function bufferToString(buffer) {
     return String.fromCharCode.apply(null, new Uint8Array(buffer));
 }
@@ -18,9 +23,22 @@ chrome.webRequest.onBeforeRequest.addListener(
         const isPost = details.method === 'POST';
         const hasBody = _.has(details, 'requestBody.raw[0].bytes');
         if (isPost && hasBody) {
-            chrome.runtime.sendMessage(bufferToString(details.requestBody.raw[0].bytes));
+            requestObj = {
+                requestId: details.requestId,
+                data: bufferToString(details.requestBody.raw[0].bytes)
+            }
         }
     },
-    { urls: ["*://*/lrs/statements"]},
+    { urls: ['<all_urls>']},
     ['requestBody']
+);
+
+chrome.webRequest.onSendHeaders.addListener(
+    function(details) {
+        if (details.requestId == requestObj.requestId && details.requestHeaders[0].name == 'X-Experience-API-Version') {
+            chrome.runtime.sendMessage(requestObj.data);
+        }
+    },
+    { urls: ['<all_urls>']},
+    ['requestHeaders']
 );

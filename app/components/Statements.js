@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Scroll from 'react-scroll';
+import ClipboardButton from 'react-clipboard.js';
 import JSONTree from 'react-json-tree';
 import moment from 'moment';
 import 'moment-duration-format';
@@ -24,7 +25,7 @@ export default class Statements extends Component {
             this.setState({
                 lastUpdated: moment()
             });
-        }, 1000);
+        }, 60000);
     }
 
     componentWillUnmount() {
@@ -71,13 +72,14 @@ export default class Statements extends Component {
                     }
 
                     const timestamp = moment(s.timestamp);
-                    const timeAgo = moment.duration(moment().diff(timestamp)).format('h[h]m[m]s[s] ago');
+                    const timeAgo = moment.duration(moment().diff(timestamp)).format('h[h]m[m] ago');
                     return (
 
                         <div key={index} className="statement-block">
                             <div className="statement-heading">
                                 <h3>{printedStatement}</h3>
                                 <span>{timeAgo}</span>
+                                <ClipboardButton data-clipboard-text={JSON.stringify(s, null, 4)}><i className="icon ion-clipboard"></i></ClipboardButton>
                             </div>
                             <JSONTree
                                 theme={theme}
