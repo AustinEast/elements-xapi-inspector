@@ -40,7 +40,6 @@ chrome.webRequest.onSendHeaders.addListener(
             // Need to check for lower case header name (Firefox support)
             const hasHeader = _.some(details.requestHeaders, function(header) { return header.name.toLowerCase() === 'x-experience-api-version'; });
             if (hasId && hasHeader) {
-                debugger;
                 chrome.runtime.sendMessage(requestObj.data);
             }
         }
