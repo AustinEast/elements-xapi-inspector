@@ -35,8 +35,14 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 chrome.webRequest.onSendHeaders.addListener(
     function(details) {
-        if (details.requestId == requestObj.requestId && details.requestHeaders[0].name == 'X-Experience-API-Version') {
-            chrome.runtime.sendMessage(requestObj.data);
+        if (details.method === 'POST') {
+            const hasId = details.requestId == requestObj.requestId;
+            // Need to check for lower case header name (Firefox support)
+            const hasHeader = _.some(details.requestHeaders, function(header) { return header.name.toLowerCase() === 'x-experience-api-version'; });
+            if (hasId && hasHeader) {
+                debugger;
+                chrome.runtime.sendMessage(requestObj.data);
+            }
         }
     },
     { urls: ['<all_urls>']},
