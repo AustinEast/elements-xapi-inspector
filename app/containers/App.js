@@ -34,7 +34,7 @@ class App extends Component {
         return (
             <main>
                 <Menu languages={languages} filters={filters} {...this.props} />
-                <List {...this.props} />
+                <List filters={filters} {...this.props} />
                 <Footer />
             </main>
         );

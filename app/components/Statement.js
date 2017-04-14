@@ -15,9 +15,6 @@ export default class Statement extends Component {
         this.constructReadibleStatement = this.constructReadibleStatement.bind(this);
         this.state = { 
             lastUpdated: props.lastUpdated,
-            statement: props.statement, 
-            status: props.status,
-            statusCode: props.statusCode,
             isMenuOpen: false 
         };
     }
@@ -58,13 +55,14 @@ export default class Statement extends Component {
     }
 
     render() {
-        const printedStatement = this.constructReadibleStatement(this.state.statement);
-        const timestamp = moment(this.state.statement.timestamp);
+        const { filters, statusCode, statement, } = this.props;
+        const printedStatement = this.constructReadibleStatement(statement);
+        const timestamp = moment(statement.timestamp);
         const timeAgo = moment.duration(moment().diff(timestamp)).format('h[h]m[m] ago');
-
+        
         const statusClass = classNames({
-            'status-success': (this.props.statusCode >= 200 && this.props.statusCode < 300),
-            'status-failure': (this.props.statusCode < 200 || this.props.statusCode >= 300)
+            'status-success': filters[1].check(this.props.statusCode),
+            'status-failure': filters[2].check(this.props.statusCode)
         });
 
         const menuOptions = {
@@ -80,14 +78,14 @@ export default class Statement extends Component {
                     <h3>{printedStatement}</h3>
                     <span className='time'>{timeAgo}</span>
                     <DropdownMenu {...menuOptions}>
-                        <li><ClipboardButton data-clipboard-text={JSON.stringify(this.state.statement, null, 4)}>Copy Statement</ClipboardButton></li>
-                        <li><a href={'https://httpstatuses.com/' + this.state.statusCode } target='blank'>Status Code - { this.state.statusCode }</a></li>
+                        <li><ClipboardButton data-clipboard-text={JSON.stringify(statement, null, 4)}>Copy Statement</ClipboardButton></li>
+                        <li><a href={'https://httpstatuses.com/' + statusCode } target='blank'>Status Code - { statusCode }</a></li>
                     </DropdownMenu>
                 </div>
                 <div className="statement-body">
                     <JSONTree
                         theme={theme}
-                        data={this.state.statement}
+                        data={statement}
                         invertTheme={false}
                         hideRoot={true}
                     />
