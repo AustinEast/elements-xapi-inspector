@@ -54,14 +54,14 @@ export default class Statement extends Component {
     }
 
     render() {
-        const { filters, statusCode, statement, } = this.props;
+        const { filters, statusCode, statement } = this.props;
         const printedStatement = this.constructReadibleStatement(statement);
         const timestamp = moment(statement.timestamp);
         const timeAgo = moment.duration(moment().diff(timestamp)).format('h[h]m[m] ago');
         
         const statusClass = classNames({
-            'status-success': filters[1].check(this.props.statusCode),
-            'status-failure': filters[2].check(this.props.statusCode)
+            'status-success': filters[1].check(statusCode),
+            'status-failure': filters[2].check(statusCode)
         });
 
         const menuOptions = {
