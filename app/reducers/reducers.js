@@ -5,7 +5,7 @@ export function statements(state = [], action) {
     switch (action.type) {
         case types.ADD_STATEMENT:
             return [
-                ...state.concat(JSON.parse(action.statement))
+                ...state.concat(action.statement)
             ]
         case types.CLEAR_STATEMENT:
             return []
@@ -14,10 +14,19 @@ export function statements(state = [], action) {
     }
 }
 
-export function language(state = 'en-us', action) {
+export function language(state = { name: 'English', id: 'en-us' }, action) {
     switch (action.type) {
         case types.LANGUAGE_SELECTED:
             return action.language
+        default:
+            return state;
+    }
+}
+
+export function filter(state = { name: 'All', check: function(statusCode) { return true } }, action) {
+    switch (action.type) {
+        case types.FILTER_SELECTED:
+            return action.filter
         default:
             return state;
     }

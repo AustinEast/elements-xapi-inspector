@@ -38,6 +38,11 @@
     "redux-logger": "^2.0.4",
     "redux-thunk": "^1.0.0",
     "style-loader": "^0.12.3",
+    "url-loader": "^0.5.8",
     "webpack": "^1.13.3"
+  },
+  "dependencies": {
+    "react-addons-css-transition-group": "^15.5.2",
+    "react-dd-menu": "^2.0.0"
   }
 }
