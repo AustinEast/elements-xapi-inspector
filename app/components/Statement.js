@@ -13,7 +13,6 @@ export default class Statement extends Component {
         super(props);
         this.checkLanguage = this.checkLanguage.bind(this);
         this.constructReadibleStatement = this.constructReadibleStatement.bind(this);
-        this.isFunction = this.isFunction.bind(this);
         this.state = { 
             lastUpdated: props.lastUpdated,
             statement: props.statement, 
@@ -56,11 +55,6 @@ export default class Statement extends Component {
             return name + ' ' + verb + ' ' + object;
         }
         return _.get(statement, 'verb.id','Unknown verb');
-    }
-
-    isFunction(functionToCheck) {
-        var getType = {};
-        return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
     }
 
     render() {
