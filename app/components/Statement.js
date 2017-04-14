@@ -14,7 +14,6 @@ export default class Statement extends Component {
         this.checkLanguage = this.checkLanguage.bind(this);
         this.constructReadibleStatement = this.constructReadibleStatement.bind(this);
         this.state = { 
-            lastUpdated: props.lastUpdated,
             isMenuOpen: false 
         };
     }

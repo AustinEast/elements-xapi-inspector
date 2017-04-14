@@ -36,7 +36,7 @@ export default class List extends Component {
             <article>
                 {statements.map((s, index) => {
                     if (!this.isFunction(filter.check) || filter.check(s.statusCode)) {
-                        return (<Statement key={index} lastUpdated={ this.state.lastUpdated } statement={ s.statement } statusCode={ s.statusCode } {...this.props}/>);
+                        return (<Statement key={index} statement={ s.statement } statusCode={ s.statusCode } {...this.props}/>);
                     }
                 })}
             </article>
